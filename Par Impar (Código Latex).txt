@@ -1,0 +1,111 @@
+\documentclass[]{article}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows}
+\usepackage[a2paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolor},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	numbers=left
+}
+
+%opening
+\title{Tarea de Programación: Par e Impar}
+\author{Melissa Gutiérrez Hernández}
+
+\begin{document}
+	
+\maketitle
+
+\section{Objetivo:}
+Escriba un programa en el que el usuario ingrese un número entero positivo. Luego, el programa debe determinar si el número ingresado es par o impar y mostrar un mensaje correspondiente. Entregar el pseudócodigo, un diagrama de actividades, y el código en Java.
+
+\section{Desarrollo del Programa:}
+
+
+\subsection{Diagrama de Flujo:}	
+	
+	\tikzstyle{startstop} = [rectangle, rounded corners,minimum width=3cm,minimum height=1cm,text centered,draw=black, fill=green!120] 
+	\tikzstyle{io}=[trapezium,trapezium left angle=70,trapezium right angle=110,minimum width=3cm,minimum height=1cm,text centered,draw=black,fill=green!75] 
+	\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!40]
+	\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!95] 
+	\tikzstyle{arrow} = [thick,->,>=stealth] 
+
+\begin{tikzpicture}[node distance=3cm] 
+	
+	\node (start) [startstop] { \bf Inicio};
+	\node (input) [io,below of=start] { \bf Mostrar: "Introduzca un numero entero positivo"};
+	\node (read) [process,below of=input] {\bf Leer: 'digit'};
+	\node (decision) [decision,below of=read,] { \bf digit MOD 2 == 0};
+	\node (output1) [io,left of=decision,xshift=-7cm]{ \bf Mostrar: "El numero introducido es par"}; 
+	\node (output2) [io,right of=decision,xshift=7cm]{ \bf Mostrar: "El numero introducido es impar"}; 
+	\node (stop) [startstop,below of=decision]{ \bf Fin};
+	
+	\draw[-stealth,thick](start) --(input);
+	\draw[-stealth,thick](input) --(read); 
+	\draw[-stealth,thick](read) --(decision);
+	\draw[-stealth,thick] (decision) -- node[anchor=south] {Sí} (output1);
+	\draw[-stealth,thick] (decision) -- node[anchor=south] {No} (output2); 
+	\draw[-stealth,thick] (output1) |- (stop);
+	\draw[-stealth,thick] (output2) |- (stop);
+	
+\end{tikzpicture}
+
+\subsection{Pseudocódigo:}
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+	
+	\caption{Determinar si un numero entero positivo es par o impar}
+	\STATE  Declarar la variable \textit{digit} como entero
+	\STATE Mostrar: "Introduzca un número entero positivo"
+	\STATE Leer \textit{digit}
+	\IF { \textit{digit} MOD 2 == 0}
+	\STATE Mostrar: "El numero introducido es par"
+	\ELSE
+	\STATE Mostrar: "El numero introducido es impar"
+	\ENDIF
+	
+\end{algorithmic}	
+\end{algorithm}
+
+\subsection{Código Java:}
+
+
+	
+ \begin{lstlisting}[language=Java,style=mystyle]
+ 	
+ 	import java.util.Scanner;
+ 	
+ 	public class ParImpar {
+ 		public static void main(String args[]){
+ 			Scanner in = new Scanner(System.in);
+ 			
+ 			System.out.println("Ingrese un numero entero positivo");
+ 			int digit = in.nextInt();
+ 			
+ 			if (digit % 2 == 0){
+ 				System.out.println("El numero ingresado es par");
+ 			} else{
+ 				System.out.println("El numero ingresado es impar");
+ 			}
+ 			
+ 			in.close();
+ 		}
+ 	}
+ 	
+  \end{lstlisting}
+
+
+\end{document}
